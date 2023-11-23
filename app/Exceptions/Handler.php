@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
                 'meta' => [
                     'code' => 401,
                     'status' => 'error',
-                    'message' => 'Token has Expired',
+                    'message' => 'Token has expired',
                 ],
                 'data' => [
                     'exceptions' => $e
@@ -80,7 +80,7 @@ class Handler extends ExceptionHandler
                 'meta' => [
                     'code' => 401,
                     'status' => 'error',
-                    'message' => 'Method not allowed ..',
+                    'message' => 'Method not allowed',
                 ],
                 'data' => [
                     'exceptions' => $e
@@ -93,7 +93,7 @@ class Handler extends ExceptionHandler
                 'meta' => [
                     'code' => 401,
                     'status' => 'error',
-                    'message' => 'Route not found ..',
+                    'message' => 'Route not found',
                 ],
                 'data' => [
                     'exceptions' => $e
