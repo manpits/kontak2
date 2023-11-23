@@ -16,7 +16,9 @@ use App\Http\Controllers\WilayahApiController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::get('/', function () {
+    return redirect()->route('route.show');
+});
 Route::post('/register',[UserController::class, 'register'])->name('api.register');
 Route::post('/login', [UserController::class, 'login'])->name('api.logout');;
 //
