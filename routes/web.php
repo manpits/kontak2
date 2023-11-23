@@ -36,4 +36,4 @@ Route::get('/', function () {
         echo "</tr>";
     }
     echo "</table>";
-});
+})->name('route.show');;
