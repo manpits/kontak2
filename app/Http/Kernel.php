@@ -45,10 +45,6 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    protected $routeMiddleware = [
-        'auth.jwt'=>\App\Http\Middleware\JwtMiddleWare::class,
-    ];
-
     /**
      * The application's middleware aliases.
      *
@@ -68,5 +64,6 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'auth.jwt'=>\App\Http\Middleware\JWTMiddleWare::class,
     ];
 }
