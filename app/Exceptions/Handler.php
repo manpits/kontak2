@@ -73,17 +73,19 @@ class Handler extends ExceptionHandler
             ],401);
         });
 
-        $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
-            return Response::json([
-                'meta' => [
-                    'code' => 401,
-                    'status' => 'error',
-                    'message' => 'Method not allowed ..',
-                ],
-                'data' => [
-                    'exceptions' => $e
-                ]
-            ],401);
+        $this->renderable(function (Exception $e, $request) {
+            if ($exception instanceof MethodNotAllowedHttpException){
+                return Response::json([
+                    'meta' => [
+                        'code' => 401,
+                        'status' => 'error',
+                        'message' => 'Method not allowed ..',
+                    ],
+                    'data' => [
+                        'exceptions' => $e
+                    ]
+                ],401);
+            }
         });
 
         // $this->renderable(function (Throwable $e, $request) {
