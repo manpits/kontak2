@@ -17,12 +17,12 @@ use App\Http\Controllers\WilayahApiController;
 |
 */
 
-Route::post('/register',[UserController::class, 'register']);
-Route::post('/login', [UserController::class, 'login']);
+Route::post('/register',[UserController::class, 'register'])->name('api.register');
+Route::post('/login', [UserController::class, 'login'])->name('api.logout');;
 //
 Route::group(['middleware'=>['auth.jwt']],function () {
-    Route::get('/user', [UserController::class, 'getUser']);
-    Route::post('/logout',[UserController::class, 'logout']);        
+    Route::get('/user', [UserController::class, 'getUser'])->name('api.getuser');;
+    Route::post('/logout',[UserController::class, 'logout'])->name('api.logout');;        
     //
     Route::apiResource('/kontak',KontakApiController::class);
     Route::get('/provinsi',[WilayahApiController::class,'getProvinsi']);
