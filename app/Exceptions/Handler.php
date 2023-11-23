@@ -10,6 +10,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException; 
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -87,18 +88,18 @@ class Handler extends ExceptionHandler
             ],401);
         });
 
-        // $this->renderable(function (Throwable $e, $request) {
-        //     return Response::json([
-        //         'meta' => [
-        //             'code' => 401,
-        //             'status' => 'error',
-        //             'message' => 'Something wrong ..',
-        //         ],
-        //         'data' => [
-        //             'exceptions' => $e
-        //         ]
-        //     ],401);
-        // });
+        $this->renderable(function (NotFoundHttpException $e, $request) {
+            return Response::json([
+                'meta' => [
+                    'code' => 401,
+                    'status' => 'error',
+                    'message' => 'Route not found ..',
+                ],
+                'data' => [
+                    'exceptions' => $e
+                ]
+            ],401);
+        });
 
     }
 }
