@@ -28,12 +28,14 @@ Route::get('/', function () {
     echo "<td width='70%'><h4>Corresponding Action</h4></td>";
     echo "</tr>";
     foreach ($routeCollection as $value) {
-        echo "<tr>";
-        echo "<td>" . $value->methods()[0] . "</td>";
-        echo "<td>" . $value->uri() . "</td>";
-        echo "<td>" . $value->getName() . "</td>";
-        echo "<td>" . $value->getActionName() . "</td>";
-        echo "</tr>";
+        if(str_contains($value->uri(),'api') || $value->uri()=='/'){
+            echo "<tr>";
+            echo "<td>" . $value->methods()[0] . "</td>";
+            echo "<td>" . $value->uri() . "</td>";
+            echo "<td>" . $value->getName() . "</td>";
+            echo "<td>" . $value->getActionName() . "</td>";
+            echo "</tr>";
+        }
     }
     echo "</table>";
 })->name('route.show');;
