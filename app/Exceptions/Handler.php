@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
                     'data' => [
                         'exceptions' => $e
                     ]
-                ],401);
+                ]);
         });
         $this->renderable(function (TokenExpiredException $e, $request) {
             return Response::json([
@@ -59,7 +59,7 @@ class Handler extends ExceptionHandler
                 'data' => [
                     'exceptions' => $e
                 ]
-            ],401);
+            ]);
         });
 
         $this->renderable(function (JWTException $e, $request) {
@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
                 'data' => [
                     'exceptions' => $e
                 ]
-            ],401);
+            ]);
         });
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
@@ -85,7 +85,7 @@ class Handler extends ExceptionHandler
                 'data' => [
                     'exceptions' => $e
                 ]
-            ],401);
+            ]);
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
@@ -98,7 +98,7 @@ class Handler extends ExceptionHandler
                 'data' => [
                     'exceptions' => $e
                 ]
-            ],401);
+            ]);
         });
 
     }
