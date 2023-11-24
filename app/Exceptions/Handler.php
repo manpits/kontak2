@@ -40,65 +40,45 @@ class Handler extends ExceptionHandler
         $this->renderable(function(TokenInvalidException $e, $request){
                 return Response::json([
                     'meta' => [
-                        'code' => 401,
-                        'status' => 'error',
-                        'message' => 'Invalid token',
-                    ],
-                    'data' => [
-                        'exceptions' => $e
+                        'code' => 402,
+                        'message' => 'Token invalid',
                     ]
-                ],401);
+                ],402);
         });
         $this->renderable(function (TokenExpiredException $e, $request) {
             return Response::json([
                 'meta' => [
-                    'code' => 401,
-                    'status' => 'error',
+                    'code' => 403,
                     'message' => 'Token has expired',
-                ],
-                'data' => [
-                    'exceptions' => $e
                 ]
-            ],401);
+            ],403);
         });
 
         $this->renderable(function (JWTException $e, $request) {
             return Response::json([
                 'meta' => [
-                    'code' => 401,
-                    'status' => 'error',
+                    'code' => 404,
                     'message' => 'Token not parsed',
-                ],
-                'data' => [
-                    'exceptions' => $e
                 ]
-            ],401);
+            ],404);
         });
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return Response::json([
                 'meta' => [
-                    'code' => 401,
-                    'status' => 'error',
-                    'message' => 'Method not allowed',
-                ],
-                'data' => [
-                    'exceptions' => $e
+                    'code' => 405,
+                    'message' => 'HTTP method not allowed',
                 ]
-            ],401);
+            ],405);
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return Response::json([
                 'meta' => [
-                    'code' => 401,
-                    'status' => 'error',
+                    'code' => 406,
                     'message' => 'Route not found',
-                ],
-                'data' => [
-                    'exceptions' => $e
                 ]
-            ],401);
+            ],406);
         });
 
     }

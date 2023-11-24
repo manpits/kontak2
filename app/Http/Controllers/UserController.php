@@ -27,11 +27,10 @@ class UserController extends Controller
 
         return response()->json([
             'meta' => [
-                'code' => 201,
-                'status' => 'success',
-                'message' => 'Successfully Created user',
+                'code' => 200,
+                'message' => 'Successfully create user',
             ],
-        ],201);
+        ],200);
     }
 
     public function login(Request $request)
@@ -47,7 +46,6 @@ class UserController extends Controller
                 return response()->json([
                     'meta' => [
                         'code' => 402,
-                        'status' => 'error',
                         'message' => 'Invalid Credentials',
                     ],
                 ], 402);
@@ -55,16 +53,14 @@ class UserController extends Controller
         } catch (JWTException $e) {
             return response()->json([
                 'meta' => [
-                    'code' => 500,
-                    'status' => 'error',
+                    'code' => 403,
                     'message' => 'Could not create token',
                 ],
-            ], 500);
+            ], 403);
         }
         return response()->json([
             'meta' => [
                 'code' => 200,
-                'status' => 'success',
                 'message' => 'Successfully logged in',
                 'token' => $token
             ],
@@ -75,14 +71,13 @@ class UserController extends Controller
         $user = auth('api')->user();
         return response()->json([
             'meta' => [
-                'code' => 201,
-                'status' => 'success',
+                'code' => 200,
                 'message' => 'Successfully get user',
             ],
             'data' => [
                 'user'=>$user
             ],
-        ], 201);
+        ], 200);
     }
 
     public function logout(Request $request){
@@ -96,11 +91,10 @@ class UserController extends Controller
             return response()->json([
                 'meta' => [
                     'code' => 200,
-                    'status' => 'success',
                     'message' => 'Successfully logged out',
                 ],
                 'data' => [],
-            ]);
+            ],200);
         }
     }
 }
