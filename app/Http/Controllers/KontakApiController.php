@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Desa;
 use App\Models\Kontak;
+use App\Models\Provinsi;
+use App\Models\Kabupaten;
+use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use GuzzleHttp\Psr7\Response;
 
 class KontakApiController extends Controller
 {
@@ -12,7 +17,12 @@ class KontakApiController extends Controller
      */
     public function index()
     {
-        return Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get();
+
+        return response()->json([
+            'code'     => 200,
+            'status' => 'success', 
+            'kontak' => Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get(),
+        ], 200); 
     }
 
     /**
@@ -23,7 +33,11 @@ class KontakApiController extends Controller
         $kontak = new Kontak();
         $kontak->fill($request->all());
         $kontak->save();
-        return $kontak;
+        return response()->json([
+            'code'     => 200,
+            'status' => 'success', 
+            'kontak' => $kontak,
+        ],200); 
     }
 
     /**
@@ -31,7 +45,11 @@ class KontakApiController extends Controller
      */
     public function show(string $id)
     {
-        return Kontak::find($id,['id','nama','alamat','desa_id','telepon','lahir','gender']);
+        return response()->json([
+            'code'     => 200,
+            'status' => 'success', 
+            'kontak' => Kontak::find($id,['id','nama','alamat','desa_id','telepon','lahir','gender']),
+        ],200);
     }
 
     /**
@@ -41,7 +59,11 @@ class KontakApiController extends Controller
     {
         $kontak = Kontak::find($id);
         $kontak->fill($request->all())->save();
-        return $kontak;
+        return response()->json([
+            'code'     => 200,
+            'status' => 'success', 
+            'kontak' => $kontak,
+        ],200);
     }
 
     /**
@@ -50,6 +72,9 @@ class KontakApiController extends Controller
     public function destroy(string $id)
     {
         $kontak = Kontak::find($id)->delete();
-        return [];
+        return response()->json([
+            'code'     => 200,
+            'status' => 'success',            
+        ],200);
     }
 }

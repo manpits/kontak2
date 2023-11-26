@@ -39,45 +39,40 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function(TokenInvalidException $e, $request){
                 return Response::json([
-                    'meta' => [
-                        'code' => 402,
-                        'message' => 'Token invalid',
-                    ]
+                    'code'     => 402,
+                    'status' => 'failed',
+                    'message'=> 'Token invalid',
                 ],402);
         });
         $this->renderable(function (TokenExpiredException $e, $request) {
             return Response::json([
-                'meta' => [
-                    'code' => 403,
-                    'message' => 'Token has expired',
-                ]
+                'code'     => 403,
+                'status' => 'failed',
+                'message'=> 'Token has expired',
             ],403);
         });
 
         $this->renderable(function (JWTException $e, $request) {
             return Response::json([
-                'meta' => [
-                    'code' => 404,
-                    'message' => 'Token not parsed',
-                ]
+                'code'     => 404,
+                'status' => 'failed',
+                'message'=> 'Token not parsed',
             ],404);
         });
 
         $this->renderable(function (MethodNotAllowedHttpException $e, $request) {
             return Response::json([
-                'meta' => [
-                    'code' => 405,
-                    'message' => 'HTTP method not allowed',
-                ]
+                'code'     => 405,
+                'status' => 'failed',
+                'message'=> 'HTTP method not allowed',
             ],405);
         });
 
         $this->renderable(function (NotFoundHttpException $e, $request) {
             return Response::json([
-                'meta' => [
-                    'code' => 406,
-                    'message' => 'Route not found',
-                ]
+                'code'     => 406,
+                'status' => 'failed',
+                'message'=> 'Route not found',
             ],406);
         });
 

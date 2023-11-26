@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\User;
 use JWTAuth;
+use Carbon\Carbon;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
@@ -42,27 +44,31 @@ class UserController extends Controller
 
         $credentials = $request->only('email', 'password');
         try {
+            // Config::set('jwt.ttl', env('JWT_TTL', 1));
+            JWTAuth::factory()->setTTL(5);
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json([
                     'meta' => [
-                        'code' => 402,
+                        'code' => 401,
                         'message' => 'Invalid Credentials',
                     ],
-                ], 402);
+                ], 401);
             }
         } catch (JWTException $e) {
             return response()->json([
                 'meta' => [
-                    'code' => 403,
+                    'code' => 500,
                     'message' => 'Could not create token',
                 ],
-            ], 403);
+            ], 500);
         }
+        $exp_in_seconds = Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', $token)[1]))->exp));
         return response()->json([
             'meta' => [
                 'code' => 200,
                 'message' => 'Successfully logged in',
-                'token' => $token
+                'token' => $token,
+                'exp' => $exp_in_seconds,
             ],
         ], 200);
     }

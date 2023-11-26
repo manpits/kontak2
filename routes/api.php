@@ -27,7 +27,8 @@ Route::group(['middleware'=>['auth.jwt']],function () {
     Route::post('/logout',[UserController::class, 'logout'])->name('api.logout');;        
     //
     Route::apiResource('/kontak',KontakApiController::class);
-    Route::get('/provinsi',[WilayahApiController::class,'getProvinsi'])->name('api.provinsi');
+    Route::get('/getRegion',[WilayahApiController::class,'getAllRegionData'])->name('api.getRegion');
+    Route::get('/provinsi/{prov_id}',[WilayahApiController::class,'getProvinsi'])->name('api.provinsi');
     Route::get('/kabupaten/{prov_id}',[WilayahApiController::class,'getKabupatan'])->name('api.kabupaten');
     Route::get('/kecamatan/{kab_id}',[WilayahApiController::class,'getKecamatan'])->name('api.kecamatan');
     Route::get('/desa/{kec_id}',[WilayahApiController::class,'getDesa'])->name('api.desa');
