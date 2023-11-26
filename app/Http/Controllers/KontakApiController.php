@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Desa;
 use App\Models\Kontak;
 use App\Models\Provinsi;
@@ -20,6 +21,7 @@ class KontakApiController extends Controller
 
         return response()->json([
             'code'     => 200,
+            'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get(),
         ], 200); 
@@ -35,6 +37,7 @@ class KontakApiController extends Controller
         $kontak->save();
         return response()->json([
             'code'     => 200,
+            'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => $kontak,
         ],200); 
@@ -47,6 +50,7 @@ class KontakApiController extends Controller
     {
         return response()->json([
             'code'     => 200,
+            'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => Kontak::find($id,['id','nama','alamat','desa_id','telepon','lahir','gender']),
         ],200);
@@ -61,6 +65,7 @@ class KontakApiController extends Controller
         $kontak->fill($request->all())->save();
         return response()->json([
             'code'     => 200,
+            'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => $kontak,
         ],200);
@@ -74,6 +79,7 @@ class KontakApiController extends Controller
         $kontak = Kontak::find($id)->delete();
         return response()->json([
             'code'     => 200,
+            'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success',            
         ],200);
     }

@@ -68,7 +68,7 @@ class UserController extends Controller
                 'code' => 200,
                 'message' => 'Successfully logged in',
                 'token' => $token,
-                'exp' => $exp_in_seconds,
+                'token-expired' => $exp_in_seconds,
             ],
         ], 200);
     }
