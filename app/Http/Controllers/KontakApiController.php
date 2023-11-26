@@ -45,7 +45,7 @@ class KontakApiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
         return response()->json([
             'code'     => 200,
@@ -73,7 +73,7 @@ class KontakApiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         $kontak = Kontak::find($id)->delete();
         return response()->json([
