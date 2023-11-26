@@ -16,9 +16,8 @@ class KontakApiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-
         return response()->json([
             'code'     => 200,
             'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
