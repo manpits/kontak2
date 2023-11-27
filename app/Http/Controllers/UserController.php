@@ -45,7 +45,7 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         try {
             // Config::set('jwt.ttl', env('JWT_TTL', 1));
-            JWTAuth::factory()->setTTL(null);
+            JWTAuth::factory()->setTTL(0);
             if (!$token = JWTAuth::attempt($credentials)) {
                 return response()->json([
                     'meta' => [
