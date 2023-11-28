@@ -19,19 +19,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $routeCollection = Route::getRoutes();
-    print_r(
-        array_intersect_key(
-          $_SERVER,
-          array_flip(
-            preg_grep(
-              '/^HTTP_/', 
-              array_keys($_SERVER),
-              0
-            )
-          )
-        )
-      );
-    echo $_SERVER['REMOTE_ADDR'];
+    // print_r(
+    //     array_intersect_key(
+    //       $_SERVER,
+    //       array_flip(
+    //         preg_grep(
+    //           '/^HTTP_/', 
+    //           array_keys($_SERVER),
+    //           0
+    //         )
+    //       )
+    //     )
+    //   );
+    echo 'Remote address : '.$_SERVER['HTTP_X_FORWARDED_FOR'];
     echo "<table style='width:100%'>";
     echo "<tr>";
     echo "<td width='10%'><h4>HTTP Method</h4></td>";
