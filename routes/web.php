@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $routeCollection = Route::getRoutes();
-
+    echo $_SERVER['REMOTE_ADDR'];
     echo "<table style='width:100%'>";
     echo "<tr>";
     echo "<td width='10%'><h4>HTTP Method</h4></td>";
