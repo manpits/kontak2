@@ -20,11 +20,11 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth('api')->user();
+        $user_id = auth('api')->user()->id;
         //
         return response()->json([
             'code'     => 200,
-            'user'     => $user,
+            'user_id'     => $user_id,
             'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get(),
