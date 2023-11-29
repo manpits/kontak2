@@ -20,11 +20,10 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth('api')->user()->makeHidden('email_verified_at','created_at','updated_at');
         //
         return response()->json([
             'code'     => 200,
-            'user'     => $user,
+            'user'     => $auth('api')->user()->makeHidden('email_verified_at','created_at','updated_at'),
             'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get(),
