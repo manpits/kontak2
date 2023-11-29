@@ -20,7 +20,7 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth('api')->user();
+        $user = auth('api')->user()->select('id');
         //
         return response()->json([
             'code'     => 200,
