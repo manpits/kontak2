@@ -20,7 +20,7 @@ Route::get('/', function () {
     //return redirect()->route('route.show');
 });
 Route::post('/register',[UserController::class, 'register'])->name('api.register');
-Route::post('/login', [UserController::class, 'login'])->name('api.logout');;
+Route::post('/login', [UserController::class, 'login'])->name('api.login');;
 //
 Route::group(['middleware'=>['auth.jwt']],function () {
     Route::get('/user', [UserController::class, 'getUser'])->name('api.getuser');;
