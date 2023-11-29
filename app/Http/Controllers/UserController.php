@@ -114,4 +114,17 @@ class UserController extends Controller
             ],200);
         }
     }
+
+    public function refresh(Request $request){
+        $token = JWTAuth::getToken();
+        $token = JWTAuth::refresh($token);
+        return response()->json([
+            'meta' => [
+                'code' => 200,
+                'message' => 'Token succesfully refreshed',
+                'token' => $token,
+                'type' => 'bearer',
+            ]
+        ],200);
+    }
 }
