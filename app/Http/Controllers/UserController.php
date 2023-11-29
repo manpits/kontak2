@@ -21,7 +21,13 @@ class UserController extends Controller
                 'password'=>'required'
             ]);
         } catch (\Exception $e) {
-            return $e->getMessage();
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'status'=>'failed',
+                    'message' => $e->getMessage(),
+                ],
+            ],200);
         }
         $user = new User([
             'name'=> $request->input('name'),
