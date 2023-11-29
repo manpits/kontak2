@@ -10,6 +10,7 @@ use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
 use GuzzleHttp\Psr7\Response;
+use App\Http\Controllers\UserController;
 
 class KontakApiController extends Controller
 {
@@ -18,8 +19,11 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
+        $user = UserController::getUser();
+        //
         return response()->json([
             'code'     => 200,
+            'user'     => $user,
             'token-expired'    => Carbon::now()->diffInSeconds(date("Y-m-d H:i:s", json_decode(base64_decode(explode('.', substr($request->header('Authorization'), 7))[1]))->exp)),
             'status' => 'success', 
             'kontak' => Kontak::select(['id','nama','alamat','desa_id','telepon','lahir','gender'])->get(),
