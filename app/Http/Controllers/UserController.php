@@ -41,7 +41,7 @@ class UserController extends Controller
             'meta' => [
                 'code' => 200,
                 'message' => 'Successfully create user',
-                'data' => $user->select('name','email')
+                'data' => $user
             ],
         ],200);
     }
