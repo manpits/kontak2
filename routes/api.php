@@ -17,7 +17,7 @@ use App\Http\Controllers\WilayahApiController;
 |
 */
 Route::get('/', function () {
-    //return redirect()->route('route.show');
+    return redirect()->route('route.show');
 });
 Route::post('/register',[UserController::class, 'register'])->name('api.register');
 Route::post('/login', [UserController::class, 'login'])->name('api.login');;
