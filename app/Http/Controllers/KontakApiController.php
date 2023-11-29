@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
 use Carbon\Carbon;
 use App\Models\Desa;
 use App\Models\Kontak;
@@ -19,7 +20,7 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = UserController->getUser();
+        $user = auth('api')->user();
         //
         return response()->json([
             'code'     => 200,
