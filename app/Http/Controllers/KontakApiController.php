@@ -20,7 +20,7 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = auth('api')->user()->get(['id','name','email']);
+        $user = auth('api')->user()->makeHidden('created_at');
         //
         return response()->json([
             'code'     => 200,
