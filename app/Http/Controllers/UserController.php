@@ -20,10 +20,8 @@ class UserController extends Controller
                 'email'=>'required|email|unique:users',
                 'password'=>'required'
             ]);
-                //code...
         } catch (\Exception $e) {
-            return $e;
-
+            return $e->getMessage();
         }
         $user = new User([
             'name'=> $request->input('name'),
