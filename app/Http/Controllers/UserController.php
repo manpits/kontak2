@@ -7,19 +7,24 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
+use PhpParser\Node\Stmt\TryCatch;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller
 {
     public function register(Request $request)
     {
-        return 1;
-        $this->validate($request, [
-            'name'=>'required',
-            'email'=>'required|email|unique:users',
-            'password'=>'required'
-        ]);
+        try {
+            $this->validate($request, [
+                'name'=>'required',
+                'email'=>'required|email|unique:users',
+                'password'=>'required'
+            ]);
+                //code...
+        } catch (\Exception $e) {
+            return $e;
 
+        }
         $user = new User([
             'name'=> $request->input('name'),
             'email'=> $request->input('email'),
