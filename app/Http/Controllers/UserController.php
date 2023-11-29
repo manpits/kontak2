@@ -13,6 +13,7 @@ class UserController extends Controller
 {
     public function register(Request $request)
     {
+        return 1;
         $this->validate($request, [
             'name'=>'required',
             'email'=>'required|email|unique:users',
