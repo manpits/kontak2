@@ -19,7 +19,7 @@ class KontakApiController extends Controller
      */
     public function index(Request $request)
     {
-        $user = UserController::getUser();
+        $user = UserController->getUser();
         //
         return response()->json([
             'code'     => 200,
